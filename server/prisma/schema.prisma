@@ -10,30 +10,44 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id   String @id
+  name String
+  mail String
+
+  projects Project[]
+}
+
 model Project {
-  id         String   @id
-  authorMail String
-  factors    Factor[]
+  id String @id
+
+  author   User   @relation(fields: [authorId], references: [id])
+  authorId String
+
+  factors Factor[]
 }
 
 model FactorType {
-  id         String   @id
+  id         String @id
   name       String
   pluralName String
   symbol     String
-  factors    Factor[]
+
+  factors Factor[]
 }
 
 model Factor {
-  id          String          @id
+  id          String   @id
   name        String
   description String
-  createdAt   DateTime        @default(now())
-  type        FactorType      @relation(fields: [typeId], references: [id])
-  typeId      String
-  project     Project         @relation(fields: [projectId], references: [id])
-  tags        TagsOnFactors[]
-  projectId   String
+  createdAt   DateTime @default(now())
+
+  type      FactorType @relation(fields: [typeId], references: [id])
+  typeId    String
+  project   Project    @relation(fields: [projectId], references: [id])
+  projectId String
+
+  tags TagsOnFactors[]
 }
 
 model TagsOnFactors {
@@ -46,8 +60,9 @@ model TagsOnFactors {
 }
 
 model Tag {
-  id       String          @id
+  id       String @id
   name     String
   colorHex String
-  factors  TagsOnFactors[]
+
+  factors TagsOnFactors[]
 }
