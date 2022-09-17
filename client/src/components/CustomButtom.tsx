@@ -6,7 +6,7 @@ interface CustomButtonProps{
 
 export function CustomButtom(props: CustomButtonProps) {
     return (
-        <button className={`py-2 px-6 ${props.backgroud} ${props.textColor}`}>
+        <button className={`py-2 px-6 ${props.backgroud} ${props.textColor} rounded-sm hover:opacity-90`}>
             {props.innerText}
         </button>
     )
