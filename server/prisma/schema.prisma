@@ -9,3 +9,45 @@ datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
 }
+
+model Project {
+  id         String   @id
+  authorMail String
+  factors    Factor[]
+}
+
+model FactorType {
+  id         String   @id
+  name       String
+  pluralName String
+  symbol     String
+  factors    Factor[]
+}
+
+model Factor {
+  id          String          @id
+  name        String
+  description String
+  createdAt   DateTime        @default(now())
+  type        FactorType      @relation(fields: [typeId], references: [id])
+  typeId      String
+  project     Project         @relation(fields: [projectId], references: [id])
+  tags        TagsOnFactors[]
+  projectId   String
+}
+
+model TagsOnFactors {
+  factor   Factor @relation(fields: [factorId], references: [id])
+  factorId String
+  tag      Tag    @relation(fields: [tagId], references: [id])
+  tagId    String
+
+  @@id([factorId, tagId])
+}
+
+model Tag {
+  id       String          @id
+  name     String
+  colorHex String
+  factors  TagsOnFactors[]
+}
