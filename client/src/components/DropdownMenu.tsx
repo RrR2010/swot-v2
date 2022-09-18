@@ -1,5 +1,5 @@
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
-import { List } from "phosphor-react";
+import { List,  PlusCircle, DownloadSimple, MicrosoftExcelLogo, FilePdf  } from "phosphor-react";
 
 export function DropDownMenu() {
     return (
@@ -11,21 +11,36 @@ export function DropDownMenu() {
     />  
   </DropdownMenu.Trigger>
   <DropdownMenu.Portal>
-    <DropdownMenu.Content className="bg-zinc-50 text-zinc-700 p-2 rounded-sm">
-      <DropdownMenu.Item>Nova Análise</DropdownMenu.Item>
+    <DropdownMenu.Content className="bg-zinc-50 text-zinc-700 p-2 rounded-lg shadow-md mr-16 mt-2">
+      <DropdownMenu.Item className="flex items-center gap-2 p-2 hover:outline-none cursor-pointer hover:bg-zinc-100 hover:text-[#F54B64] text-lg">
+        <PlusCircle
+        color="gray"
+        />
+        Nova Análise
+        </DropdownMenu.Item>
       <DropdownMenu.Separator />
       <DropdownMenu.Sub>
-        <DropdownMenu.SubTrigger>Exportar</DropdownMenu.SubTrigger>
+        <DropdownMenu.SubTrigger className="flex items-center gap-2 p-2 hover:outline-none cursor-pointer hover:bg-zinc-100 hover:text-[#F54B64] text-lg">
+            <DownloadSimple
+            color="gray"
+            />
+            Exportar</DropdownMenu.SubTrigger>
         <DropdownMenu.Portal>
-          <DropdownMenu.SubContent className="bg-zinc-50 text-zinc-700 p-2 rounded-sm">
-            <DropdownMenu.Item>Exportar para CSV</DropdownMenu.Item>
-            <DropdownMenu.Item>Exportar para PDF</DropdownMenu.Item>
+          <DropdownMenu.SubContent className="bg-zinc-50 text-zinc-700 p-2 rounded-lg shadow-md">
+            <DropdownMenu.Item className="flex items-center gap-2 p-2 hover:outline-none cursor-pointer hover:bg-zinc-100 hover:text-[#F54B64] text-lg">
+                <MicrosoftExcelLogo
+                color="gray"
+                />
+                Exportar para CSV</DropdownMenu.Item>
+            <DropdownMenu.Item className="flex items-center gap-2 p-2 hover:outline-none cursor-pointer hover:bg-zinc-100 hover:text-[#F54B64] text-lg">
+                <FilePdf
+                color="gray"
+                />
+                Exportar para PDF</DropdownMenu.Item>
             <DropdownMenu.Arrow />
           </DropdownMenu.SubContent>
         </DropdownMenu.Portal>
       </DropdownMenu.Sub>
-      <DropdownMenu.Separator />
-      <DropdownMenu.Item>…</DropdownMenu.Item>
     </DropdownMenu.Content>
   </DropdownMenu.Portal>
 </DropdownMenu.Root>
