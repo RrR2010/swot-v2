@@ -1,3 +1,7 @@
+<<<<<<< HEAD:client/src/components/TopBar.tsx
+=======
+
+>>>>>>> 59c5b584e89e4f4c203514e55b950a1bf174c3ac:clientside/src/components/TopBar.tsx
 import { DropDownMenu } from "./DropdownMenu";
 
 export function TopBar() {

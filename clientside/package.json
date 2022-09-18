@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD:client/package.json
   "name": "web",
+=======
+  "name": "clientside",
+>>>>>>> 59c5b584e89e4f4c203514e55b950a1bf174c3ac:clientside/package.json
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -11,8 +15,13 @@
   "dependencies": {
     "@radix-ui/react-checkbox": "^1.0.0",
     "@radix-ui/react-dialog": "^1.0.0",
+    "@radix-ui/react-dropdown-menu": "^1.0.0",
+<<<<<<< HEAD:client/package.json
     "@radix-ui/react-toggle-group": "^1.0.0",
     "axios": "^0.27.2",
+=======
+    "@radix-ui/react-tooltip": "^1.0.0",
+>>>>>>> 59c5b584e89e4f4c203514e55b950a1bf174c3ac:clientside/package.json
     "phosphor-react": "^1.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
