@@ -11,15 +11,18 @@ datasource db {
 }
 
 model User {
-  id   String @id
-  name String
-  mail String
+  id        String   @id @default(uuid())
+  name      String
+  mail      String
+  createdAt DateTime @default(now())
 
   projects Project[]
 }
 
 model Project {
-  id String @id
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  name      String
 
   author   User   @relation(fields: [authorId], references: [id])
   authorId String
@@ -28,16 +31,17 @@ model Project {
 }
 
 model FactorType {
-  id         String @id
+  id         String @id @default(uuid())
   name       String
   pluralName String
   symbol     String
+  colorHex   String
 
   factors Factor[]
 }
 
 model Factor {
-  id          String   @id
+  id          String   @id @default(uuid())
   name        String
   description String
   createdAt   DateTime @default(now())
@@ -60,7 +64,7 @@ model TagsOnFactors {
 }
 
 model Tag {
-  id       String @id
+  id       String @id @default(uuid())
   name     String
   colorHex String
 
