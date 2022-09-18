@@ -1,6 +1,6 @@
-import { SwotItem } from './components/SwotItem'
-import { TopBar } from './components/TopBar'
 import './styles/main.css'
+import { SwotItem } from '../../clientside/src/components/SwotItem'
+import { TopBar } from '../../clientside/src/components/TopBar'
 
 function App() {
 
