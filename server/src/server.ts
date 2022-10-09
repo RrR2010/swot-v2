@@ -2,6 +2,7 @@ import express, { json } from 'express'
 import { PrismaClient } from '@prisma/client'
 
 import projects from './routes/project'
+import sign from './routes/sign'
 import auth from './routes/auth'
 
 import { BaseError } from './types/errors'
@@ -11,10 +12,8 @@ export const prisma = new PrismaClient()
 
 app.use(express.json())
 
-app.use('/', auth)
-
-
-
+app.use('/', sign)
+app.all('/*', auth)
 app.use('/projects', projects)
 
 

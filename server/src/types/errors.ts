@@ -3,7 +3,9 @@ export enum ErrorType {
   ObjectAlreadyExists = "ObjectAlreadyExists",
   MissingBodyParameters = "MissingBodyParameters",
   InvalidTypesBodyParameters = "InvalidTypesBodyParameters",
-  InvalidPassword = "InvalidPassword"
+  InvalidPassword = "InvalidPassword",
+  LoginFailed = "LoginFailed",
+  Unauthenticated = "Unauthenticated",
 }
 
 export class BaseError extends Error {
@@ -78,6 +80,30 @@ export class InvalidPasswordError extends BaseError {
       "Please enter a valid password.",
       ""
     );
+  }
+};
+
+export class LoginError extends BaseError {
+  constructor() {
+    super(
+      500,
+      ErrorType.LoginFailed,
+      "Error occurred while trying to login to the server.",
+      "Please try again later.",
+      ""
+    );
+  }
+};
+
+export class UnauthenticatedError extends BaseError {
+  constructor() {
+    super(
+      403,
+      ErrorType.Unauthenticated,
+      "You are not authenticated.",
+      "Please send the authorization token with the request.",
+      ""
+    )
   }
 };
 

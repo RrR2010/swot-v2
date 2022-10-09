@@ -12,12 +12,14 @@ export async function create(name: string, authorId: string) {
   return newProject;
 }
 
-export async function getAll() {
-  return await prisma.project.findMany()
+export async function getFromUser(authorId: string) {
+  return await prisma.project.findMany({
+    where: { authorId }
+  })
 };
 
-export async function getById(id: string) {
-  return await prisma.project.findUniqueOrThrow({
-    where: { id },
+export async function getById(id: string, authorId: string) {
+  return await prisma.project.findFirst({
+    where: { id, authorId },
   })
 };
