@@ -1,10 +1,10 @@
 import { prisma } from '../server'
-import { ObjectAlreadyExistsError } from '../types/errors';
+import { ERRORS } from '../types/errors';
 
 
 export async function create(name: string, authorId: string) {
   const countSameProject = await prisma.project.count({ where: { name, authorId } });
-  if (countSameProject > 0) { return new ObjectAlreadyExistsError('name'); }
+  if (countSameProject > 0) { return new ERRORS.ObjectAlreadyExistsError(["name", "authorId"]); }
 
   const newProject = await prisma.project.create({
     data: { name, authorId }

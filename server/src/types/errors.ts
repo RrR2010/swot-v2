@@ -1,110 +1,101 @@
 export enum ErrorType {
   GeneralError = "GeneralError",
+  ObjectNotFound = "ObjectNotFound",
   ObjectAlreadyExists = "ObjectAlreadyExists",
   MissingBodyParameters = "MissingBodyParameters",
-  InvalidTypesBodyParameters = "InvalidTypesBodyParameters",
+  InvalidBodyParameters = "InvalidBodyParameters",
   InvalidPassword = "InvalidPassword",
   LoginFailed = "LoginFailed",
   Unauthenticated = "Unauthenticated",
-}
+};
 
-export class BaseError extends Error {
-  code: number;
-  type: ErrorType;
-  detail: string;
-  helpUrl: string;
-  constructor(code: number, type: ErrorType, message: string, detail: string, helpUrl: string) {
-    super(message);
-    this.code = code;
-    this.type = type;
-    this.detail = detail;
-    this.helpUrl = helpUrl;
+export class HTTPError extends Error {
+  static code: number = 400
+  static type: ErrorType = ErrorType.GeneralError
+  static message: string = "General HTTP Error"
+  static exampleMessage: string = "General HTTP Error"
+  constructor(message: string = "General HTTP Error") {
+    super(message)
+    this.message = message
   }
 };
 
 //#region CRUD Errors
 
-export class ObjectAlreadyExistsError extends BaseError {
-  constructor(existingParametersNames: string | string[]) {
-    if (typeof existingParametersNames === 'string') { existingParametersNames = [existingParametersNames] }
-    super(
-      400,
-      ErrorType.ObjectAlreadyExists,
-      `An object already exists with provided parameters: ${existingParametersNames.map(value => `'${value}'`).join(', ')}`,
-      'Please create a new object with different parameters.',
-      ""
-    );
-  };
+class ObjectAlreadyExistsError extends HTTPError {
+  static code = 400
+  static type = ErrorType.ObjectAlreadyExists
+  static exampleMessage = "An object already exists with provided parameters: {parametersNames}"
+  constructor(parametersNames: string | string[]) {
+    if (typeof parametersNames === 'string') { parametersNames = [parametersNames] }
+    super(`An object already exists with provided parameters: ${parametersNames.map(value => `'${value}'`).join(', ')}`)
+  }
 };
 
-export class ObjectNotFoundError extends BaseError {
-  constructor(seachParametersNames: string | string[]) {
-    if (typeof seachParametersNames === 'string') { seachParametersNames = [seachParametersNames] }
-    super(
-      400,
-      ErrorType.ObjectAlreadyExists,
-      `The object was not founded with provided parameters: ${seachParametersNames.map(value => `'${value}'`).join(', ')}`,
-      'Please provide a new search with different parameters.',
-      ""
-    );
-  };
+class ObjectNotFoundError extends HTTPError {
+  static code = 404
+  static type = ErrorType.ObjectNotFound
+  static exampleMessage = "The object was not founded with provided parameters: {parametersNames}"
+  constructor(parametersNames: string | string[]) {
+    if (typeof parametersNames === 'string') { parametersNames = [parametersNames] }
+    super(`The object was not founded with provided parameters: ${parametersNames.map(value => `'${value}'`).join(', ')}`)
+  }
 };
 
 //#endregion
 
 //#region Request Errors
 
-export class MissingBodyParametersError extends BaseError {
-  constructor(missingParametersNames: string | string[]) {
-    if (typeof missingParametersNames === 'string') { missingParametersNames = [missingParametersNames] }
-    super(
-      400,
-      ErrorType.MissingBodyParameters,
-      `Request body missing the parameters: ${missingParametersNames.map(value => `'${value}'`).join(', ')}`,
-      'Send a request with correct parameters.',
-      ""
-    );
-  };
+class MissingBodyParametersError extends HTTPError {
+  static code = 400
+  static type = ErrorType.MissingBodyParameters
+  static exampleMessage = "Request body missing the parameters: {parametersNames}"
+  constructor(parametersNames: string | string[]) {
+    if (typeof parametersNames === 'string') { parametersNames = [parametersNames] }
+    super(`Request body missing the parameters: ${parametersNames.map(value => `'${value}'`).join(', ')}`)
+  }
+};
+
+class InvalidBodyParameters extends HTTPError {
+  static code = 400
+  static type = ErrorType.InvalidBodyParameters
+  static exampleMessage = "The provided parameters was invalid: {parametersNames}"
+  constructor(parametersNames: string | string[]) {
+    if (typeof parametersNames === 'string') { parametersNames = [parametersNames] }
+    super(`The provided parameters was invalid: ${parametersNames.map(value => `'${value}'`).join(', ')}`)
+  }
 };
 
 //#endregion
 
 //#region Login Errors
 
-export class InvalidPasswordError extends BaseError {
+class LoginError extends HTTPError {
+  static code = 500
+  static type = ErrorType.LoginFailed
+  static exampleMessage = "Error occurred while trying to login to the server."
   constructor() {
-    super(
-      400,
-      ErrorType.InvalidPassword,
-      "The provided password is invalid.",
-      "Please enter a valid password.",
-      ""
-    );
+    super("Error occurred while trying to login to the server.")
   }
 };
 
-export class LoginError extends BaseError {
+class UnauthenticatedError extends HTTPError {
+  static code = 401
+  static type = ErrorType.Unauthenticated
+  static exampleMessage = "You are not authenticated. Please send the authorization token with the request."
   constructor() {
-    super(
-      500,
-      ErrorType.LoginFailed,
-      "Error occurred while trying to login to the server.",
-      "Please try again later.",
-      ""
-    );
-  }
-};
-
-export class UnauthenticatedError extends BaseError {
-  constructor() {
-    super(
-      403,
-      ErrorType.Unauthenticated,
-      "You are not authenticated.",
-      "Please send the authorization token with the request.",
-      ""
-    )
+    super("You are not authenticated. Please send the authorization token with the request.")
   }
 };
 
 //#endregion
+
+export const ERRORS = {
+  HTTPError,
+  ObjectAlreadyExistsError,
+  ObjectNotFoundError,
+  MissingBodyParametersError,
+  InvalidBodyParameters,
+  LoginError,
+  UnauthenticatedError,
+}

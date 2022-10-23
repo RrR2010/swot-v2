@@ -1,0 +1,26 @@
+{
+  "definition": {
+    "openapi": "3.0.0",
+    "info": {
+      "title": "SWOT Express API Explorer",
+      "description": "The SWOT Express API Explorer is a tool to provide the REST API documentation. It serves you a simple way of interacting with the API without using code.",
+      "termsOfService": "http://localhost:3333/terms",
+      "version": "1.0.0",
+      "contact": {
+        "name": "David Inácio",
+        "email": "thedavid2009@gmail.com"
+      }
+    },
+    "servers": [
+      {
+        "url": "http://localhost:3333",
+        "description": "Test API"
+      }
+    ]
+  },
+  "apis": [
+    "./src/docs/*.yaml",
+    "./src/docs/*.json",
+    "./src/routes/**/*-docs.yaml"
+  ]
+}

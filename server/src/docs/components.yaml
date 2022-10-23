@@ -1,0 +1,38 @@
+components:
+  schemas:
+    UserLogin:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Max Taylor
+        email:
+          type: string
+          example: maxtaylor123@email.com
+        password:
+          type: string
+          example: 2684expressMax
+    NewUser:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+          example: $2a$10$joZl4bmU/wthy0mC4ocYhuNsFt68TrCbidhzgUANPuqIMeB.C4Lrq
+        createdAt:
+          type: string
+          format: date-time
+    HTTPError:
+      type: object
+      properties:
+          code: 
+            type: number
+          type:
+            type: string
+          message:
+            type: string

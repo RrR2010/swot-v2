@@ -1,0 +1,29 @@
+paths:
+  /signup:
+    post:
+      summary: New user signup.
+      description: Use this route to create a new user.
+      tags:
+        - Login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserLogin'
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NewUser'
+        
+        401:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPError'
+              examples:
+                MissingBodyParameters:
+                  $ref: '#/components/errors/MissingBodyParameters'
+                ObjectAlreadyExists:
+                  $ref: '#/components/errors/ObjectAlreadyExists'

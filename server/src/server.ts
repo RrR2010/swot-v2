@@ -1,16 +1,29 @@
-import express, { json } from 'express'
+// modules
+import express from 'express'
 import { PrismaClient } from '@prisma/client'
+import swaggerUi from 'swagger-ui-express'
+import swaggerJSDoc from 'swagger-jsdoc'
 
-import projects from './routes/project'
-import sign from './routes/sign'
-import auth from './routes/auth'
+// routes
+import auth from './routes/auth/auth'
+import sign from './routes/sign/sign'
+import projects from './routes/projects/project'
 
-import { BaseError } from './types/errors'
+// JSON objects
+import swaggerOptions from './config/swagger-options.json';
+import { HTTPError } from './types/errors'
+
+// utils functions
+import { prepareErrorDocs } from './utils/error-docs-generator'
 
 const app = express()
 export const prisma = new PrismaClient()
 
+prepareErrorDocs()
+
 app.use(express.json())
+
+app.use('/api', swaggerUi.serve, swaggerUi.setup(swaggerJSDoc(swaggerOptions)))
 
 app.use('/', sign)
 app.all('/*', auth)
@@ -60,12 +73,12 @@ app.get('/factors', async (req, res) => {
   return res.json(factors)
 })
 
-app.use((err: BaseError, req: express.Request, res: express.Response, next: any) => {
-  return res.status(err.code).json({
-    'type': err.type.toString(),
-    'message': err.message,
-    'details': err.detail,
-    'helpUrl': err.helpUrl
+app.use((err: HTTPError, req: express.Request, res: express.Response, next: any) => {
+  const errorClass = <typeof HTTPError>err.constructor
+  return res.status(errorClass.code).json({
+    'code': errorClass.code,
+    'type': errorClass.type.toString(),
+    'message': err.message
   })
 });
 

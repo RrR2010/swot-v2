@@ -1,9 +1,9 @@
 import express from 'express'
 import jwt from 'jsonwebtoken'
 
-import { UnauthenticatedError } from '../types/errors'
+import { ERRORS } from '../../types/errors'
 
-const authConfig = require('../config/auth')
+import authConfig from '../../config/auth.json'
 
 const router = express.Router()
 
@@ -12,7 +12,7 @@ router.all("/*", (req, res, next) => {
 
   jwt.verify(token, authConfig.secret, (err: any, userInfo: any) => {
     if (err) {
-      next(new UnauthenticatedError());
+      next(new ERRORS.UnauthenticatedError());
       return;
     }
     req.body.loggedUserId = userInfo.id;
