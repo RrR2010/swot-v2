@@ -4,7 +4,7 @@ paths:
       summary: New user signup.
       description: Use this route to create a new user.
       tags:
-        - Login
+        - Authentication and authorization
       requestBody:
         content:
           application/json:
@@ -27,3 +27,5 @@ paths:
                   $ref: '#/components/errors/MissingBodyParameters'
                 ObjectAlreadyExists:
                   $ref: '#/components/errors/ObjectAlreadyExists'
+                GeneralError:
+                  $ref: '#/components/errors/GeneralError'

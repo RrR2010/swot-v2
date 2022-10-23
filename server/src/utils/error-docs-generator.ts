@@ -1,4 +1,4 @@
-const ERROR_DOCS_PATH = './src/routes/errors-docs.yaml'
+const ERROR_DOCS_PATH = './src/routes/errors/errors-docs.yaml'
 
 import yaml from "js-yaml";
 import fs from "fs";

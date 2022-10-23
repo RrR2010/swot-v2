@@ -4,7 +4,7 @@ components:
       value:
         code: 400
         type: GeneralError
-        message: HTTP Error
+        message: General HTTP Error
     ObjectAlreadyExists:
       value:
         code: 400

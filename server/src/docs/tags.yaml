@@ -1,0 +1,3 @@
+tags:
+  - name: Authentication and authorization
+    description: Routes to realize signin and signup operations
