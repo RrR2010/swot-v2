@@ -1,8 +1,12 @@
 components:
   schemas:
-    UserLogin:
+    User:
       type: object
       properties:
+        id:
+          type: string
+          description: URID generated
+          example: b2f7f4d9-b18a-4843-88bd-65e6331885af
         name:
           type: string
           example: Max Taylor
@@ -12,21 +16,26 @@ components:
         password:
           type: string
           example: 2684expressMax
-    NewUser:
+        createdAt:
+          type: string
+          format: date-time
+    Project:
       type: object
       properties:
         id:
           type: string
+          description: URID generated
+          example: 44be8dc2-ffc2-410e-893d-0aad4ed74bec
         name:
           type: string
-        email:
+          example: Max Cakes SWOT of 2022
+        authorId:
           type: string
-        password:
-          type: string
-          example: $2a$10$joZl4bmU/wthy0mC4ocYhuNsFt68TrCbidhzgUANPuqIMeB.C4Lrq
+          example: b2f7f4d9-b18a-4843-88bd-65e6331885af
         createdAt:
           type: string
           format: date-time
+          example: 2022-10-24T01:12:20.799Z
     HTTPError:
       type: object
       properties:

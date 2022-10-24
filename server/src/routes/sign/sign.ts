@@ -38,6 +38,7 @@ router.post('/signup', async (req, res, next) => {
 
 router.post('/signin', async (req, res, next) => {
   const { email, password } = req.body;
+  if (!email || !password) { next(new ERRORS.MissingBodyParametersError(['email', 'password'])); return }
 
   let user = await prisma.user.findFirst({
     where: { email },

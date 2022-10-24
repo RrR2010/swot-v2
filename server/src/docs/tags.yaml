@@ -1,3 +1,5 @@
 tags:
   - name: Authentication and authorization
     description: Routes to realize signin and signup operations
+  - name: Projects
+    description: Routes to realize CRUD in Projects database

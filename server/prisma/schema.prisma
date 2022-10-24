@@ -22,11 +22,11 @@ model User {
 
 model Project {
   id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
   name      String
+  createdAt DateTime @default(now())
+  authorId  String
 
-  author   User   @relation(fields: [authorId], references: [id])
-  authorId String
+  author User @relation(fields: [authorId], references: [id])
 
   factors Factor[]
 }
