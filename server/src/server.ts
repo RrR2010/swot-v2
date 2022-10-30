@@ -5,16 +5,16 @@ import swaggerUi from 'swagger-ui-express'
 import swaggerJSDoc from 'swagger-jsdoc'
 
 // routes
-import auth from './routes/auth/auth'
-import sign from './routes/sign/sign'
-import projects from './routes/projects/project'
+import auth from '../src/api/v1/routes/auth'
+import sign from '../src/api/v1/routes/sign'
+import projects from '../src/api/v1/routes/project'
 
 // JSON objects
-import swaggerOptions from './config/swagger-options.json';
-import { HTTPError } from './types/errors'
+import swaggerOptions from './config/swagger/options.json'
+import { HTTPError } from './api/v1/interfaces/errors'
 
 // utils functions
-import { prepareErrorDocs } from './utils/error-docs-generator'
+import { prepareErrorDocs } from './api/v1/helpers/error-docs-generator'
 
 const app = express()
 export const prisma = new PrismaClient()

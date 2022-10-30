@@ -82,9 +82,9 @@ class LoginError extends HTTPError {
 class UnauthenticatedError extends HTTPError {
   static code = 401
   static type = ErrorType.Unauthenticated
-  static exampleMessage = "You are not authenticated. Please send the authorization token with the request."
+  static exampleMessage = "You are not authenticated. Please send the authorization token with the request header using 'Authorization: Bearer [Token]."
   constructor() {
-    super("You are not authenticated. Please send the authorization token with the request.")
+    super("You are not authenticated. Please send the authorization token with the request header using 'Authorization: Bearer [Token].")
   }
 };
 

@@ -1,9 +1,9 @@
-const ERROR_DOCS_PATH = './src/routes/errors/errors-docs.yaml'
+const ERROR_DOCS_PATH = './src/config/swagger/errors.yaml'
 
 import yaml from "js-yaml";
 import fs from "fs";
 
-import { ERRORS } from "../types/errors";
+import { ERRORS } from "../interfaces/errors";
 
 function resetErrorSchemas() {
   fs.writeFileSync(ERROR_DOCS_PATH, yaml.dump({

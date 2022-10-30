@@ -1,9 +1,9 @@
 import express from 'express'
 import jwt from 'jsonwebtoken'
 
-import { ERRORS } from '../../types/errors'
+import { ERRORS } from '../interfaces/errors'
 
-import authConfig from '../../config/auth.json'
+import authConfig from '../../../config/auth.json'
 
 const router = express.Router()
 

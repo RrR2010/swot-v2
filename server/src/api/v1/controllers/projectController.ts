@@ -1,5 +1,5 @@
-import { prisma } from '../server'
-import { ERRORS } from '../types/errors';
+import { prisma } from '../../../server'
+import { ERRORS } from '../interfaces/errors';
 
 
 export async function create(name: string, authorId: string) {

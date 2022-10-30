@@ -19,8 +19,10 @@
     ]
   },
   "apis": [
-    "./src/docs/*.yaml",
-    "./src/docs/*.json",
-    "./src/routes/**/*-docs.yaml"
+    "./src/api/v1/docs/*.yaml",
+    "./src/config/swagger/*.yaml",
+    "./src/api/v1/docs/*.json",
+    "./src/api/v1/routes/**/*.ts",
+    "./src/api/v1/routes/**/*-docs.yaml"
   ]
 }

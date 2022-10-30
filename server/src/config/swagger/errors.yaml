@@ -36,4 +36,4 @@ components:
         type: Unauthenticated
         message: >-
           You are not authenticated. Please send the authorization token with
-          the request.
+          the request header using 'Authorization: Bearer [Token].
